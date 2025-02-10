@@ -2,7 +2,6 @@ package com.project.portfolio_create.Portfolio.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -35,7 +34,6 @@ public class securityConfig {
                         .requestMatchers("/api/auth/**").permitAll()  // 회원가입 & 로그인 API는 인증 없이 접근 가능
                         .anyRequest().permitAll()  // 그 외 요청은 인증 필요
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(form -> form.disable())  // 기본 로그인 폼 비활성화
                 .httpBasic(basic -> basic.disable()); // 기본 HTTP 인증 비활성화
 
