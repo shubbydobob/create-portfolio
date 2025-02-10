@@ -69,4 +69,24 @@ public class UserService {
                 token
                 );
     }
+
+    public UserResponseDTO getCurrentUser(String token) {
+        String userId = jwtUtil.validateToken(token);
+        if(userId == null) {
+            throw new RuntimeException("유효하지 않은 토큰입니다.");
+        }
+
+        Users users = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+
+        return new UserResponseDTO(
+                users.getId(),
+                users.getName(),
+                users.getUserId(),
+                users.getEmail(),
+                users.getCareer(),
+                users.getStudyStack(),
+                token
+        );
+    }
 }
