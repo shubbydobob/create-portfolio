@@ -1,0 +1,33 @@
+jwt:
+  secret: "6cVUh9tVtq7lKW+K6NhhNqL7Nqsi7kszYhzf/9n0qWFso8gIVLwye79M7yiXLFvc
+9ZMRXG4x+Wsm2ETo5Sg7pw=="
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DEMO_POSTGRESQL_URL:jdbc:postgresql://localhost:5433/portfolio_create}
+    username: ${DEMO_POSTGRESQL_USERNAME:root}
+    password: ${DEMO_POSTGRESQL_PASSWORD:root}
+
+    # connection pool (usage: hikari pool)
+    hikari:
+      connection-timeout: 30_000
+      idle-timeout: 60_000
+      max-lifetime: 1_800_000
+      maximum-pool-size: 300
+      minimum-idle: 5
+      leak-detection-threshold: 2000
+
+  jpa:
+    properties:
+      hibernate:
+        format-sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+    flyway:
+      baseline-on-migrate: true
+      locations:
+        - classpath:db/migration
